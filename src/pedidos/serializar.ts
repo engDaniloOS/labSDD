@@ -1,0 +1,29 @@
+import type { FormaPagamento, Pedido } from './dados.js';
+
+// Formato de resposta que os clientes já consomem.
+// Os nomes misturam convenções porque a API cresceu em épocas diferentes:
+// valor_total e forma_pagamento vieram da primeira versão,
+// criadoEm entrou depois.
+
+function pagamento(forma: FormaPagamento) {
+  switch (forma.tipo) {
+    case 'cartao':
+      return { tipo: 'cartao', bandeira: forma.bandeira, parcelas: forma.parcelas, final_cartao: forma.finalCartao };
+    case 'pix':
+      return { tipo: 'pix', chave: forma.chave };
+    case 'boleto':
+      return { tipo: 'boleto', linha_digitavel: forma.linhaDigitavel, vencimento: forma.vencimento };
+  }
+}
+
+export function serializarPedido(p: Pedido) {
+  return {
+    id: p.id,
+    cliente: p.cliente,
+    status: p.status,
+    valor_total: p.valorTotal,
+    criadoEm: p.criadoEm,
+    forma_pagamento: pagamento(p.formaPagamento),
+    itens: p.itens.map((i) => ({ sku: i.sku, quantidade: i.quantidade, preco_unitario: i.precoUnitario })),
+  };
+}

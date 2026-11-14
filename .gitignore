@@ -1,0 +1,8 @@
+node_modules
+bin/
+.eval/
+relatorios/
+*.log
+.DS_Store
+.schemathesis/
+.claude/settings.local.json

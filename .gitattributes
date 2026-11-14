@@ -1,0 +1,3 @@
+# Fins de linha LF em todo sistema, inclusive no Windows.
+# Scripts e trocas de texto do curso esperam LF.
+* text=auto eol=lf

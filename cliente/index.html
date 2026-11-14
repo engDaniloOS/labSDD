@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechLog · Pedidos</title>
+  <style>
+    :root { --tinta: #1c1433; --suave: #5d5578; --linha: #e2ddef; --roxo: #410994; --erro: #a4161a; --fundo: #f5f3fa; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.5 system-ui, sans-serif; color: var(--tinta); background: var(--fundo); }
+    main { max-width: 960px; margin: 0 auto; padding: 32px 16px; }
+    h1 { margin: 0 0 4px; font-size: 26px; }
+    .origem { color: var(--suave); font-size: 14px; margin: 0 0 24px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--linha); }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--linha); }
+    th { font-size: 13px; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; }
+    td.valor { font-variant-numeric: tabular-nums; }
+    .selo { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; background: #ece6ff; color: var(--roxo); }
+    .selo.cancelado { background: #fde8e8; color: var(--erro); }
+    .erro { padding: 16px; border: 1px solid var(--erro); color: var(--erro); background: #fff5f5; border-radius: 8px; }
+    button { font: inherit; font-size: 14px; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--roxo); background: #fff; color: var(--roxo); cursor: pointer; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Pedidos</h1>
+    <p class="origem" id="origem"></p>
+    <div id="conteudo">Carregando...</div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
