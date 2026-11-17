@@ -2,7 +2,7 @@
 // Cada chamada a criarBase() devolve uma cópia nova, para que os testes
 // e as execuções não interfiram umas nas outras.
 
-export type Status = 'criado' | 'pago' | 'enviado' | 'entregue';
+export type Status = 'criado' | 'pago' | 'enviado' | 'entregue' | 'cancelado';
 
 export type FormaPagamento =
   | { tipo: 'cartao'; bandeira: string; parcelas: number; finalCartao: string }
@@ -23,7 +23,16 @@ export interface Pedido {
   valorTotal: number;
   criadoEm: string;
   formaPagamento: FormaPagamento;
+  canceladoEm?: string;
+  motivo?: string;
 }
+
+export type ResultadoCancelamento =
+  | { tipo: 'ok'; pedido: Pedido }
+  | { tipo: 'nao-encontrado' }
+  | { tipo: 'nao-cancelavel'; statusAtual: Status };
+
+const STATUS_CANCELAVEIS: Status[] = ['criado', 'pago'];
 
 const SEMENTE: Pedido[] = [
   {
@@ -90,6 +99,21 @@ export function criarBase() {
       const pedido = { id: `PED-${proximo++}`, ...dados };
       pedidos.push(pedido);
       return pedido;
+    },
+    cancelar: (id: string, motivo?: string): ResultadoCancelamento => {
+      const pedido = pedidos.find((p) => p.id === id);
+      if (!pedido) {
+        return { tipo: 'nao-encontrado' };
+      }
+      if (!STATUS_CANCELAVEIS.includes(pedido.status)) {
+        return { tipo: 'nao-cancelavel', statusAtual: pedido.status };
+      }
+      pedido.status = 'cancelado';
+      pedido.canceladoEm = new Date().toISOString();
+      if (motivo) {
+        pedido.motivo = motivo;
+      }
+      return { tipo: 'ok', pedido };
     },
   };
 }

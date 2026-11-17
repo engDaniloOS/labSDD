@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
+    "test": "tsx --test tests/**/*.test.ts",
     "conferir": "node scripts/conferir-ambiente.mjs",
     "diagnostico": "node scripts/diagnostico.mjs"
   },

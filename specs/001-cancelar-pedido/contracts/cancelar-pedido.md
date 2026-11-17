@@ -43,7 +43,8 @@ Quando `motivo` não é informado, o campo `motivo` fica ausente no JSON de resp
 
 ## Respostas de erro (Problem Details, RFC 9457)
 
-`Content-Type: application/problem+json` em todos os casos abaixo.
+`Content-Type: application/problem+json` (com `charset=utf-8`, adicionado automaticamente pelo
+Express) em todos os casos abaixo.
 
 ### 404 — pedido não encontrado
 
